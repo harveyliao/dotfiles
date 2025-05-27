@@ -28,3 +28,5 @@ ln -sf ~/dotfiles/xournalpp ~/.config/
 ln -sf ~/dotfiles/yazi ~/.config/
 # zellij terminal multiplexer
 ln -sf ~/dotfiles/zellij ~/.config/
+# zed
+ln -sf ~/dotfiles/zed ~/.config/
