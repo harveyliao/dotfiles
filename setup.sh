@@ -12,3 +12,5 @@ ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/power10k/.p10k.zsh ~/.p10k.zsh
 # kitty terminal emulator
 ln -sf ~/dotfiles/kitty ~/.config/
+# nvim
+ln -sf ~/dotfiles/nvim ~/.config/
