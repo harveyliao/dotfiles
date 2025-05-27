@@ -1,4 +1,3 @@
-# xournalpp note
-./xournalpp/autosave/*
-./xournalpp/metadata/*
-
+# xournalpp note taking app
+xournalpp/autosave
+xournalpp/metadata
