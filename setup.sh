@@ -1,4 +1,17 @@
 #!/bin/bash
+## clone powerlevel10k GitHub repo
+# Define the target directory
+TARGET_DIR="$HOME/dotfiles/powerlevel10k"
+
+# Check if the directory exists
+if [ ! -d "$TARGET_DIR" ]; then
+  # Directory does not exist, so clone the repo
+  git clone https://github.com/romkatv/powerlevel10k.git "$TARGET_DIR"
+  echo "Powerlevel10k cloned into $TARGET_DIR"
+else
+  echo "Powerlevel10k already exists at $TARGET_DIR"
+fi
+
 # setup symlinks
 
 ## home folder

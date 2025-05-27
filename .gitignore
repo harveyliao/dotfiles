@@ -1,3 +1,5 @@
 # xournalpp note taking app
 xournalpp/autosave
 xournalpp/metadata
+# powerlevel10k github repo, clone in setup.sh
+powerlevel10k
