@@ -24,3 +24,5 @@ ln -sf ~/dotfiles/joshuto ~/.config/
 ln -sf ~/dotfiles/rstudio ~/.config/
 # Xournalpp note taking app
 ln -sf ~/dotfiles/xournalpp ~/.config/
+# yazi terminal file manager
+ln -sf ~/dotfiles/yazi ~/.config/
