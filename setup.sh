@@ -22,3 +22,5 @@ ln -sf ~/dotfiles/nvim ~/.config/
 ln -sf ~/dotfiles/joshuto ~/.config/
 # RStudio
 ln -sf ~/dotfiles/rstudio ~/.config/
+# Xournalpp note taking app
+ln -sf ~/dotfiles/xournalpp ~/.config/
