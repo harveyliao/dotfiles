@@ -14,3 +14,5 @@ ln -sf ~/dotfiles/power10k/.p10k.zsh ~/.p10k.zsh
 ln -sf ~/dotfiles/kitty ~/.config/
 # nvim
 ln -sf ~/dotfiles/nvim ~/.config/
+# joshuto (not using)
+ln -sf ~/dotfiles/joshuto ~/.config/
