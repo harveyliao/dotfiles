@@ -10,3 +10,5 @@ ln -sf ~/dotfiles/zsh/.zshenv ~/.zshenv
 ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc
 # powerlevel10k
 ln -sf ~/dotfiles/power10k/.p10k.zsh ~/.p10k.zsh
+# kitty terminal emulator
+ln -sf ~/dotfiles/kitty ~/.config/
