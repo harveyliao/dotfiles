@@ -1,0 +1,10 @@
+#!/bin/bash
+# setup symlinks
+# bash
+ln -sf ~/dotfiles/bash/.bashrc ~/.bashrc
+ln -sf ~/dotfiles/bash/.bash_profile ~/.bash_profile
+# zsh
+ln -sf ~/dotfiles/zsh/.zshrc ~/.zshrc
+ln -sf ~/dotfiles/zsh/.zshenv ~/.zshenv
+# vim
+ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc
