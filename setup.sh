@@ -26,3 +26,5 @@ ln -sf ~/dotfiles/rstudio ~/.config/
 ln -sf ~/dotfiles/xournalpp ~/.config/
 # yazi terminal file manager
 ln -sf ~/dotfiles/yazi ~/.config/
+# zellij terminal multiplexer
+ln -sf ~/dotfiles/zellij ~/.config/
