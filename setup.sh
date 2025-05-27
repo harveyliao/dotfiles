@@ -8,3 +8,5 @@ ln -sf ~/dotfiles/zsh/.zshrc ~/.zshrc
 ln -sf ~/dotfiles/zsh/.zshenv ~/.zshenv
 # vim
 ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc
+# powerlevel10k
+ln -sf ~/dotfiles/power10k/.p10k.zsh ~/.p10k.zsh
