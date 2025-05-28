@@ -198,70 +198,70 @@
   home.file = {
     # Powerlevel10k configuration
     ".p10k.zsh" = {
-      source = ./p10k/.p10k.zsh;
+      source = /home/nixos/dotfiles/p10k/.p10k.zsh;
       # Only create if the source exists
-      enable = builtins.pathExists ./p10k/.p10k.zsh;
+      enable = builtins.pathExists /home/nixos/dotfiles/p10k/.p10k.zsh;
     };
 
     # Vim configuration
     ".vimrc" = {
-      source = ./vim/.vimrc;
-      enable = builtins.pathExists ./vim/.vimrc;
+      source = /home/nixos/dotfiles/vim/.vimrc;
+      enable = builtins.pathExists /home/nixos/dotfiles/vim/.vimrc;
     };
 
     # Application configurations in .config
     ".config/nvim" = {
-      source = ./nvim;
+      source = /home/nixos/dotfiles/nvim;
       recursive = true;
-      enable = builtins.pathExists ./nvim;
+      enable = builtins.pathExists /home/nixos/dotfiles/nvim;
     };
 
     ".config/yazi" = {
-      source = ./yazi;
+      source = /home/nixos/dotfiles/yazi;
       recursive = true;
-      enable = builtins.pathExists ./yazi;
+      enable = builtins.pathExists /home/nixos/dotfiles/yazi;
     };
 
     ".config/zellij" = {
-      source = ./zellij;
+      source = /home/nixos/dotfiles/zellij;
       recursive = true;
-      enable = builtins.pathExists ./zellij;
+      enable = builtins.pathExists /home/nixos/dotfiles/zellij;
     };
 
     ".config/kitty" = {
-      source = ./kitty;
+      source = /home/nixos/dotfiles/kitty;
       recursive = true;
-      enable = builtins.pathExists ./kitty;
+      enable = builtins.pathExists /home/nixos/dotfiles/kitty;
     };
 
     ".config/helix" = {
-      source = ./helix;
+      source = /home/nixos/dotfiles/helix;
       recursive = true;
-      enable = builtins.pathExists ./helix;
+      enable = builtins.pathExists /home/nixos/dotfiles/helix;
     };
 
     ".config/zed" = {
-      source = ./zed;
+      source = /home/nixos/dotfiles/zed;
       recursive = true;
-      enable = builtins.pathExists ./zed;
+      enable = builtins.pathExists /home/nixos/dotfiles/zed;
     };
 
     ".config/rstudio" = {
-      source = ./rstudio;
+      source = /home/nixos/dotfiles/rstudio;
       recursive = true;
-      enable = builtins.pathExists ./rstudio;
+      enable = builtins.pathExists /home/nixos/dotfiles/rstudio;
     };
 
     ".config/xournalpp" = {
-      source = ./xournalpp;
+      source = /home/nixos/dotfiles/xournalpp;
       recursive = true;
-      enable = builtins.pathExists ./xournalpp;
+      enable = builtins.pathExists /home/nixos/dotfiles/xournalpp;
     };
 
     ".config/joshuto" = {
-      source = ./joshuto;
+      source = /home/nixos/dotfiles/joshuto;
       recursive = true;
-      enable = builtins.pathExists ./joshuto;
+      enable = builtins.pathExists /home/nixos/dotfiles/joshuto;
     };
   };
 

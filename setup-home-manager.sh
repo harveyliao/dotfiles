@@ -8,15 +8,21 @@ if ! command -v nixos-rebuild &> /dev/null; then
     exit 1
 fi
 
-# Check if Home Manager is available
-if ! command -v home-manager &> /dev/null; then
-    echo "📦 Installing Home Manager..."
+# Check if Home Manager channel exists
+if ! nix-channel --list | grep -q "home-manager"; then
+    echo "📦 Adding Home Manager channel..."
     
-    # Add Home Manager channel
-    nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz home-manager
+    # Add Home Manager channel for both user and root
+    nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz home-manager
+    sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz home-manager
+    
+    echo "🔄 Updating channels..."
     nix-channel --update
+    sudo nix-channel --update
     
-    echo "✅ Home Manager channel added"
+    echo "✅ Home Manager channel added for both user and root"
+else
+    echo "✅ Home Manager channel already exists"
 fi
 
 # Clone powerlevel10k if it doesn't exist
@@ -34,6 +40,36 @@ if [ ! -f "/etc/nixos/home.nix" ]; then
     echo "📋 Copying home.nix to /etc/nixos/..."
     sudo cp ~/dotfiles/home.nix /etc/nixos/home.nix
     echo "✅ home.nix copied to /etc/nixos/"
+fi
+
+# Verify that Home Manager is available in NIX_PATH
+echo "🔍 Verifying Home Manager availability..."
+if ! nix-instantiate --eval -E '<home-manager>' &> /dev/null; then
+    echo "❌ Home Manager not found in NIX_PATH. Trying to fix..."
+    
+    # Export NIX_PATH to include home-manager
+    export NIX_PATH="$NIX_PATH:home-manager=/nix/var/nix/profiles/per-user/root/channels/home-manager"
+    
+    # Try again
+    if ! nix-instantiate --eval -E '<home-manager>' &> /dev/null; then
+        echo "❌ Still can't find Home Manager. Please run the following commands manually:"
+        echo "   sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz home-manager"
+        echo "   sudo nix-channel --update"
+        echo "   sudo nixos-rebuild switch"
+        exit 1
+    fi
+fi
+echo "✅ Home Manager is available"
+
+# Test the configuration first
+echo "🧪 Testing NixOS configuration..."
+if ! sudo nixos-rebuild dry-build; then
+    echo "❌ Configuration test failed. Please check your configuration files."
+    echo "💡 Common issues:"
+    echo "   • Check that /etc/nixos/configuration.nix imports home-manager correctly"
+    echo "   • Verify that /etc/nixos/home.nix exists and is valid"
+    echo "   • Make sure all dotfile paths in home.nix exist"
+    exit 1
 fi
 
 # Rebuild NixOS configuration (this will also apply Home Manager)
