@@ -11,15 +11,17 @@
   imports = [
     # include NixOS-WSL modules
     <nixos-wsl/modules>
+    # Home Manager NixOS module
+    <home-manager/nixos>
   ];
 
   wsl.enable = true;
   wsl.defaultUser = "nixos";
 
   environment.systemPackages = with pkgs; [
-    # Core Utilities
+    # Core system utilities only
     gcc
-    git # version control
+    git # version control (system-wide)
     curl # download
     wget # download
     htop # resource monitor
@@ -27,85 +29,21 @@
     tree 
     unzip # zip
     p7zip # 7z
-    ripgrep # Fast search tool
-    fd # File finder
-    bat # Cat with syntax highlighting
-    zoxide # better cd
-    lazygit # Git TUI
-    jq # JSON preview
-    fzf # fuzzyfinder
-
-    # Development tools
-    rustup
-    python3
-
-    # Shell and terminal enhancements
-    zsh 
-    zsh-autosuggestions
-    atuin # shell history sync
-    fastfetch # replace neofetch
-    zellij # terminal multiplexer
-
-    # Text editors (from your dotfiles)
-    vim # classic editor
-    neovim # modern vim
-
-    # File managers
-    yazi # modern terminal file manager
-
-    # Terminal emulator
-    # kitty # GPU-accelerated terminal
-
-    # Additional tools from your dotfiles
-    # nodejs 
-    # rstudio # R development
+    
+    # Essential system tools
+    zsh # shell (system-wide)
+    
+    # Keep these system-wide for all users
+    rustup # system-wide rust toolchain
+    python3 # system-wide python
   ];
 
-  # Enable Zsh as the default shell
+  # Enable Zsh as the default shell (system-wide)
   users.defaultUserShell = pkgs.zsh;
-  programs.zsh = {
-    enable = true;
-    autosuggestions.enable = true;
-    # Enable additional zsh features
-    syntaxHighlighting.enable = true;
-    ohMyZsh = {
-      enable = false; # use powerlevel10k instead
-    };
-    interactiveShellInit = ''
-      # Initialize tools from your dotfiles
-      eval "$(zoxide init zsh)"
-      eval "$(atuin init zsh)"
-      
-      # Vi mode (from your .zshrc)
-      set -o vi
-      
-      # Aliases from your dotfiles
-      alias ll='ls -la'
-      alias llh='ls -lah'
-      alias ze='zellij'
-      alias lg='lazygit'
-      
-      # Yazi wrapper function (from your dotfiles)
-      function y() {
-        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-        yazi "$@" --cwd-file="$tmp"
-        if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-          builtin cd -- "$cwd"
-        fi
-        rm -f -- "$tmp"
-      }
-    '';
-  };
+  programs.zsh.enable = true;
 
-  # Git configuration
-  programs.git = {
-    enable = true;
-    # Uncomment and configure if you want system-wide git settings
-    # config = {
-    #   user.name = "Your Name";
-    #   user.email = "your.email@example.com";
-    # };
-  };
+  # Home Manager configuration
+  home-manager.users.nixos = import ./home.nix;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -115,5 +53,6 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
 
-  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  # Enable experimental features for Home Manager
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
