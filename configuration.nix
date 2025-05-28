@@ -17,7 +17,7 @@
   wsl.defaultUser = "nixos";
 
   environment.systemPackages = with pkgs; [
-    # Core Util
+    # Core Utilities
     gcc
     git # version control
     curl # download
@@ -35,7 +35,6 @@
     jq # JSON preview
     fzf # fuzzyfinder
 
-
     # Development tools
     rustup
     python3
@@ -43,27 +42,69 @@
     # Shell and terminal enhancements
     zsh 
     zsh-autosuggestions
-    # atuin # shell history sync
+    atuin # shell history sync
     fastfetch # replace neofetch
     zellij # terminal multiplexer
 
-    # text editor
-    neovim
+    # Text editors (from your dotfiles)
+    vim # classic editor
+    neovim # modern vim
 
-    # file manager
-    yazi
+    # File managers
+    yazi # modern terminal file manager
 
+    # Terminal emulator
+    # kitty # GPU-accelerated terminal
+
+    # Additional tools from your dotfiles
+    # nodejs 
+    # rstudio # R development
   ];
 
   # Enable Zsh as the default shell
   users.defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
-    autosuggestions.enable = true; # Enables zsh-autosuggestions
-    # Optionally, enable other zsh plugins or settings
+    autosuggestions.enable = true;
+    # Enable additional zsh features
+    syntaxHighlighting.enable = true;
+    ohMyZsh = {
+      enable = false; # use powerlevel10k instead
+    };
     interactiveShellInit = ''
-      source ${pkgs.zsh-autosuggestions}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+      # Initialize tools from your dotfiles
+      eval "$(zoxide init zsh)"
+      eval "$(atuin init zsh)"
+      
+      # Vi mode (from your .zshrc)
+      set -o vi
+      
+      # Aliases from your dotfiles
+      alias ll='ls -la'
+      alias llh='ls -lah'
+      alias ze='zellij'
+      alias lg='lazygit'
+      
+      # Yazi wrapper function (from your dotfiles)
+      function y() {
+        local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+        yazi "$@" --cwd-file="$tmp"
+        if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+          builtin cd -- "$cwd"
+        fi
+        rm -f -- "$tmp"
+      }
     '';
+  };
+
+  # Git configuration
+  programs.git = {
+    enable = true;
+    # Uncomment and configure if you want system-wide git settings
+    # config = {
+    #   user.name = "Your Name";
+    #   user.email = "your.email@example.com";
+    # };
   };
 
   # This value determines the NixOS release from which the default
@@ -73,4 +114,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
+
+  # nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
