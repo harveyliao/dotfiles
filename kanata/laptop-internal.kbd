@@ -1,0 +1,96 @@
+;; Kanata config for laptop keyboard (ANSI/US layout).
+
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defvar
+  tap-time 230
+  hold-time 230
+)
+
+(defalias
+  ;; Esc on tap, Ctrl on hold (from &mt LCTRL ESC).
+  escctl (tap-hold $tap-time $hold-time esc lctl)
+
+  ;; Esc on tap, Caps on hold
+  esccaps (tap-hold $tap-time $hold-time esc caps)
+
+  ;; Home-row mods (Colemak).
+  hma (tap-hold $tap-time $hold-time a lmet)
+  hmr (tap-hold $tap-time $hold-time r lalt)
+  hms (tap-hold $tap-time $hold-time s lsft)
+  hmt (tap-hold $tap-time $hold-time t lctl)
+  hmn (tap-hold $tap-time $hold-time n rctl)
+  hme (tap-hold $tap-time $hold-time e rsft)
+  hmi (tap-hold $tap-time $hold-time i ralt)
+  hmo (tap-hold $tap-time $hold-time o rmet)
+
+  ;; Home-row mods (QWERTY).
+  qha (tap-hold $tap-time $hold-time a lmet)
+  qhs (tap-hold $tap-time $hold-time s lalt)
+  qhd (tap-hold $tap-time $hold-time d lsft)
+  qhf (tap-hold $tap-time $hold-time f lctl)
+  qhj (tap-hold $tap-time $hold-time j rctl)
+  qhk (tap-hold $tap-time $hold-time k rsft)
+  qhl (tap-hold $tap-time $hold-time l ralt)
+  qhsc (tap-hold $tap-time $hold-time ; rmet)
+
+  ;; Momentary layers (ZMK &mo 2 / &mo 3).
+  lower (layer-toggle lower)
+  raise (layer-toggle raise)
+  mod   (layer-toggle mod)
+
+  ;; QWERTY toggle
+  qwtog (layer-switch qwerty)
+  ;; COLEMAK toggle
+  cotog (layer-switch colemak)
+)
+
+(defsrc
+  grv  1 2 3 4 5 6 7 8 9 0 - = bspc
+  tab  q w e r t y u i o p [ ] \
+  caps a s d f g h j k l ; '
+  lsft z x c v b n m , . / rsft
+  lctl lmet lalt spc ralt rctl
+)
+
+(deflayer colemak
+  grv  1 2 3 4 5 6 7 8 9 0 - = bspc
+  tab  q w f p g j l u y ; [ ] \
+  @esccaps @hma @hmr @hms @hmt d h @hmn @hme @hmi @hmo '
+  lsft z x c v b k m , . / rsft
+  lctl lmet @lower spc @raise rctl
+)
+
+(deflayer qwerty
+  grv  1 2 3 4 5 6 7 8 9 0 - = bspc
+  tab  q w e r t y u i o p [ ] \
+  @esccaps @qha @qhs @qhd @qhf g h @qhj @qhk @qhl @qhsc '
+  lsft z x c v b n m , . / rsft
+  lctl lmet @lower spc @raise rctl
+)
+
+(deflayer lower
+  _    _ _ _ _ _ _ _ _ _ _ _ _ _
+  S-grv S-1 S-2 S-3 S-4 S-5 S-6 S-7 S-8 S-9 S-0 _ _ _
+  del  _ _ _ _ _ _ S-- S-= S-[ S-] S-\
+  _    _ _ _ _ _ S-\ home pgdn pgup end _
+  _    _    _    _   @mod _
+)
+
+(deflayer raise
+  _    _ _ _ _ _ _ _ _ _ _ _ _ _
+  grv  1 2 3 4 5 6 7 8 9 0 _ _ _
+  del  F1 F2 F3 F4 F5 F6 - = [ ] \
+  caps F7 F8 F9 F10 F11 F12 left down up right _
+  _    _    @mod _   _    _
+)
+
+(deflayer mod
+  _    _ _ _ _ _ _ _ _ _ _ _ _ _
+  _    _ _ _ _ _ _ _ _ _ _ _ _ _
+  _    _ _ _ _ _ _ @cotog @qwtog _ _ _
+  _    _ _ _ _ _ _ _ _ _ _ _
+  _    _    _    _   _    _
+)
