@@ -4,24 +4,6 @@
 
 [mgr]
 
-#lazygit plugin
-prepend_keymap = [
-  { on = ["u", "a"], run = "plugin yamb save", desc = "Add bookmark" },
-  { on = ["u", "g"], run = "plugin yamb jump_by_key", desc = "Jump bookmark by key" },
-  { on = ["u", "G"], run = "plugin yamb jump_by_fzf", desc = "Jump bookmark by fzf" },
-  { on = ["u", "d"], run = "plugin yamb delete_by_key", desc = "Delete bookmark by key" },
-  { on = ["u", "D"], run = "plugin yamb delete_by_fzf", desc = "Delete bookmark by fzf" },
-  { on = ["u", "A"], run = "plugin yamb delete_all", desc = "Delete all bookmarks" },
-  { on = ["u", "r"], run = "plugin yamb rename_by_key", desc = "Rename bookmark by key" },
-  { on = ["u", "R"], run = "plugin yamb rename_by_fzf", desc = "Rename bookmark by fzf" },
-  { on = ["g", "i"], run = "plugin lazygit", desc = "run lazygit" },
-# compress plugin
-  { on = ["c", "a", "a"], run = "plugin compress",     desc = "Archive selected files" },
-  { on = ["c", "a", "p"], run = "plugin compress -p",  desc = "Archive selected files (password)" },
-  { on = ["c", "a", "h"], run = "plugin compress -ph", desc = "Archive selected files (password+header)" },
-  { on = ["c", "a", "l"], run = "plugin compress -l",  desc = "Archive selected files (compression level)" },
-  { on = ["c", "a", "u"], run = "plugin compress -phl",desc = "Archive selected files (password+header+level)" }
-]
 keymap = [
 	{ on = "<Esc>", run = "escape",             desc = "Exit visual mode, clear selection, or cancel search" },
 	{ on = "<C-[>", run = "escape",             desc = "Exit visual mode, clear selection, or cancel search" },
@@ -100,8 +82,8 @@ keymap = [
 	{ on = "s",         run = "search --via=fd",             desc = "Search files by name via fd" },
 	{ on = "S",         run = "search --via=rg",             desc = "Search files by content via ripgrep" },
 	{ on = "<C-s>",     run = "escape --search",             desc = "Cancel the ongoing search" },
-	{ on = "z",         run = "plugin zoxide",               desc = "Jump to a directory via zoxide" },
-	{ on = "Z",         run = "plugin fzf",                  desc = "Jump to a file/directory via fzf" },
+	{ on = "z",         run = "plugin fzf",                  desc = "Jump to a file/directory via fzf" },
+	{ on = "Z",         run = "plugin zoxide",               desc = "Jump to a directory via zoxide" },
 
 	# Linemode
 	{ on = [ "m", "s" ], run = "linemode size",        desc = "Linemode: size" },
@@ -147,9 +129,6 @@ keymap = [
 	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go ~/Downloads" },
 	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Jump interactively" },
 	{ on = [ "g", "f" ],       run = "follow",           desc = "Follow hovered symlink" },
-	# my Goto
-	{ on = [ "g", "u" ],       run = 'cd /home/harvey/Documents/UOITWinter26',   desc = "Go Uni" },
-	{ on = [ "g", "s" ],       run = 'cd "/home/harvey/Pictures/Screenshots"',   desc = "Go Screenshots" },
 
 	# Tabs
 	{ on = "t", run = "tab_create --current", desc = "Create a new tab with CWD" },
