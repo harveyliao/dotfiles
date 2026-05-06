@@ -1,0 +1,25 @@
+# Non-managed files (reference docs, repo metadata)
+nixos/
+docs/
+README.md
+
+# Not dotfiles
+.gitignore
+
+# chezmoi's own config is local per machine, not from source
+dot_config/chezmoi/
+
+# Unused tools (uncomment to manage on a machine)
+# dot_config/joshuto/
+# dot_config/rstudio/
+# dot_config/xournalpp/
+
+# Machine-specific exclusions
+{{- if not .laptop }}
+dot_config/kanata/
+{{- end }}
+
+{{- if .wsl }}
+# Skip GUI tools on WSL
+dot_config/kitty/
+{{- end }}

@@ -1,0 +1,14 @@
+# ~/.config/chezmoi/chezmoi.toml
+# Per-machine chezmoi configuration. Customize per machine.
+# This file is NOT tracked by chezmoi -- it lives only on each local machine.
+
+[data]
+    email = "harveyliao@example.com"
+
+    # Machine type flags
+    desktop = true          # has full GUI (kitty, etc.)
+    laptop = false          # has kanata keyboard remapping
+    wsl = false             # running in WSL
+
+    # Package manager
+    package_manager = "yay" # yay (Arch), dnf (Fedora), apt (Ubuntu)

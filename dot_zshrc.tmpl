@@ -1,0 +1,66 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Powerlevel10k theme
+source ~/.local/share/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# vi style shortcut
+set -o vi
+
+# Alias by user
+alias ll='ls -la'
+alias llh='ls -lah'
+alias ze='zellij'
+alias lg='lazygit'
+
+# Package manager aliases
+{{- if eq .package_manager "yay" }}
+alias sdi='yay -S'
+alias sdu='yay -Syu'
+{{- else if eq .package_manager "dnf" }}
+alias sdi='sudo dnf install'
+alias sdu='sudo dnf update'
+{{- else if eq .package_manager "apt" }}
+alias sdi='sudo apt install'
+alias sdu='sudo apt update && sudo apt upgrade'
+{{- end }}
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=10000
+setopt appendhistory
+setopt sharehistory
+setopt incappendhistory
+
+# zsh-autosuggestions (installed via system package on most distros)
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [ -f ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+# atuin
+eval "$(atuin init zsh)"
+
+# yazi wrapper
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+# shell autocompletion for uv commands
+# eval "$(uv generate-shell-completion zsh)"
+# eval "$(uvx --generate-shell-completion zsh)"
+
+# zoxide
+eval "$(zoxide init zsh)"
