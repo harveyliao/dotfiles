@@ -19,11 +19,13 @@ alias llh='ls -lah'
 # alias sz='source ~/.zshrc'
 alias sdi='sudo dnf install'
 # alias sdu='sudo dnf update'
-alias aau='sudo dnf update -y && sudo npm update'
+# alias aau='sudo dnf update -y && sudo npm update'
+alias aau='sudo dnf update -y'
 # alias blsadd='sudo blsctl cmdline all set i915.enable_psr=0'
 # alias ra='joshuto'
 alias ze='zellij'
 alias lg='lazygit'
+alias oc='opencode'
 
 # History confirmations
 HISTSIZE=5000
@@ -53,5 +55,11 @@ function y() {
 # eval "$(uv generate-shell-completion zsh)"
 # eval "$(uvx --generate-shell-completion zsh)"
 
+# npm user-owned prefix
+export PATH="$HOME/.local/bin:$PATH"
+
 # zoxide
 eval "$(zoxide init zsh)"
+
+# opencode
+export PATH=/home/harvey/.opencode/bin:$PATH
