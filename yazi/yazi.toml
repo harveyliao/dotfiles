@@ -99,9 +99,9 @@ suppress_preload = false
 [plugin]
 fetchers = [
 	# Mimetype
-	{ id = "mime", url = "*/",         run = "mime.dir", prio = "high" },
-	{ id = "mime", url = "local://*",  run = "mime.local", prio = "high" },
-	{ id = "mime", url = "remote://*", run = "mime.remote", prio = "high" },
+	{ id = "mime", url = "*/",         run = "mime.dir",    prio = "high", group = "mime" },
+	{ id = "mime", url = "local://*",  run = "mime.local",  prio = "high", group = "mime" },
+	{ id = "mime", url = "remote://*", run = "mime.remote", prio = "high", group = "mime" },
 ]
 spotters = [
 	{ url = "*/", run = "folder" },
